@@ -1,0 +1,42 @@
+<!-- Create Kamar UI -->
+<div class="form-container">
+    <h2>Create Kamar</h2>
+    <form th:action="@{/kamars/create}" method="POST">
+        <label for="nomor_kamar">Nomor Kamar:</label>
+        <input type="text" id="nomor_kamar" name="nomor_kamar" required><br>
+
+        <label for="jenis_kamar">Jenis Kamar:</label>
+        <input type="text" id="jenis_kamar" name="jenis_kamar" required><br>
+
+        <label for="kapasitas">Kapasitas:</label>
+        <input type="text" id="kapasitas" name="kapasitas" required><br>
+
+        <label for="harga">Harga:</label>
+        <input type="text" id="harga" name="harga" required><br>
+
+        <button type="submit">Tambah Kamar</button>
+    </form>
+</div>
+
+<!-- Edit Kamar UI -->
+<div class="form-container">
+    <h2>Edit Kamar</h2>
+    <form th:action="@{/kamars/update}" method="POST">
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" required><br>
+
+        <label for="nomor_kamar">Nomor Kamar:</label>
+        <input type="text" id="nomor_kamar" name="nomor_kamar" required><br>
+
+        <label for="jenis_kamar">Jenis Kamar:</label>
+        <input type="text" id="jenis_kamar" name="jenis_kamar" required><br>
+
+        <label for="kapasitas">Kapasitas:</label>
+        <input type="text" id="kapasitas" name="kapasitas" required><br>
+
+        <label for="harga">Harga:</label>
+        <input type="text" id="harga" name="harga" required><br>
+
+        <button type="submit">Simpan Perubahan</button>
+    </form>
+</div>

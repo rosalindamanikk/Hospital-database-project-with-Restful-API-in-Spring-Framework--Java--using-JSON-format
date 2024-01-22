@@ -1,0 +1,18 @@
+<tbody>
+    <tr th:each="daftarpasien : ${daftarpasiens}">
+        <td th:text="${daftarpasien.id_pasien}">ID</td>
+        <td th:text="${daftarpasien.nama}">Nama</td>
+        <td th:text="${daftarpasien.jenis_kelamin}">Jenis Kelamin</td>
+        <td th:text="${daftarpasien.usia}">Usia</td>
+        <td th:text="${daftarpasien.alamat}">Alamat</td>
+        <td th:text="${daftarpasien.tanggalMasuk}">Tanggal Masuk</td>
+        <td>
+            <a th:href="@{/daftarpasiens/edit/{id}(id=${daftarpasien.id})}" class="settings" title="Settings" data-toggle="tooltip">
+                <i class="material-icons">&#xE8B8;</i>
+            </a>
+            <a th:href="@{/daftarpasiens/delete/{id}(id=${daftarpasien.id})}" class="delete" title="Delete" data-toggle="tooltip">
+                <i class="material-icons">&#xE5C9;</i>
+            </a>
+        </td>
+    </tr>
+</tbody>

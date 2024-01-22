@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Kamar - Dashboard Rumah Sakit</title>
+    <!-- Masukkan gaya tambahan Anda di sini -->
+    <style>
+        /* gaya Anda */
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Edit Kamar</h2>
+        <form id="editForm">
+
+            <label for="nomorKamar">Nomor Kamar:</label>
+            <input type="text" id="nomorKamar" name="nomorKamar" th:value="${kamar.nomorKamar}" required><br>
+
+            <label for="jenisKamar">Jenis Kamar:</label>
+            <input type="text" id="jenisKamar" name="jenisKamar" th:value="${kamar.jenisKamar}" required><br>
+
+            <label for="kapasitas">Kapasitas:</label>
+            <input type="text" id="kapasitas" name="kapasitas" th:value="${kamar.kapasitas}" required><br>
+
+            <label for="harga">Harga:</label>
+            <input type="text" id="harga" name="harga" th:value="${kamar.harga}" required><br>
+
+            <button type="button" onclick="submitForm()">Simpan Perubahan</button>
+        </form>
+    </div>
+
+    <script>
+        function submitForm() {
+            var form = document.getElementById('editForm');
+            var url = 'http://localhost:8010/kamars/edit/' + encodeURIComponent(/* id Anda */);
+            var formData = new FormData(form);
+
+            fetch(url, {
+                method: 'PUT',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

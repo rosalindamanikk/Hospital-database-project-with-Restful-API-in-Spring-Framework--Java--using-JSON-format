@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Rumah Sakit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+        .dashboard {
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Selamat Datang di Rumah Sakit XYZ</h1>
+    </div>
+    <div class="container">
+        <div class="dashboard">
+            <h2>Dashboard Rumah Sakit</h2>
+            <p>Selamat datang di halaman dashboard Rumah Sakit XYZ. Silakan pilih salah satu opsi di bawah ini:</p>
+            <ul>
+                <li><a href="#">Jadwal Dokter</a></li>
+                <li><a href="#">Pemeriksaan Pasien</a></li>
+                <li><a href="#">Informasi Kamar</a></li>
+                <li><a href="#">Laporan Medis</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

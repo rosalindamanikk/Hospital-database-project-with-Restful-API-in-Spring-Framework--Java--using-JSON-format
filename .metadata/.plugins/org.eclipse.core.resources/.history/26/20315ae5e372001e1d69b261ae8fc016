@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a2d9ce; /* Ubah warna latar belakang di sini */
+        }
+
+        .form-container {
+            width: 400px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: left;
+            font-size: 20px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 18px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background-color: #4CAF50;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>User Registration</h1>
+        <form th:action="@{/registration}" method="POST" th:object="${user}">
+            <label for="username">Username:</label>
+            <input type="text" id="username" th:field="*{username}" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" th:field="*{password}" name="password" required>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>

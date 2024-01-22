@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Kamar - Dashboard Rumah Sakit</title>
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a2d9ce; /* Ubah warna latar belakang di sini */
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .form-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Edit Kamar</h2>
+        <form id="editForm" th:action="@{/kamars/edit/{id}(id=${kamar.id})}" method="POST">
+
+            <label for="nomorKamar">Nomor Kamar:</label>
+            <input type="text" id="nomorKamar" name="nomor_kamar" th:value="${kamar.nomorKamar}" required><br>
+
+            <label for="jenisKamar">Jenis Kamar:</label>
+            <input type="text" id="jenisKamar" name="jenis_kamar" th:value="${kamar.jenisKamar}" required><br>
+
+            <label for="kapasitas">Kapasitas:</label>
+            <input type="text" id="kapasitas" name="kapasitas" th:value="${kamar.kapasitas}" required><br>
+
+            <label for="harga">Harga:</label>
+            <input type="text" id="harga" name="harga" th:value="${kamar.harga}" required><br>
+
+            <button type="button" onclick="updateData()">Simpan Perubahan</button>
+        </form>
+    </div>
+
+    <script>
+        function updateData() {
+            // Simulate the AJAX request with a static endpoint
+            var id = 4;
+            var data = {
+                nomor_kamar: $('#nomorKamar').val(),
+                jenis_kamar: $('#jenisKamar').val(),
+                kapasitas: $('#kapasitas').val(),
+                harga: $('#harga').val()
+            };
+            $.ajax({
+                url: '/*[[@{/kamar/}]]*/' + id,
+                type: 'PUT',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: function (result) {
+                    alert('Data berhasil diperbarui!');
+                    // Additional success handling code here
+                },
+                error: function (error) {
+                    alert('Kesalahan dalam memperbarui data!');
+                    // Additional error handling code here
+                }
+            });
+        }
+    </script>
+</body>
+</html>

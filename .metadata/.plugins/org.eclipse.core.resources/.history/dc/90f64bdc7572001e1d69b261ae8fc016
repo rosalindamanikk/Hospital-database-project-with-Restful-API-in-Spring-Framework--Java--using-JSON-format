@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Your existing head content -->
+    <style>
+        /* Your existing CSS styles */
+    </style>
+</head>
+
+<body>
+    <div class="topnav">
+        <!-- Your existing navigation bar -->
+    </div>
+    <div class="container">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <h2>Edit <b>Kamar</b></h2>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nomor Kamar</th>
+                            <th>Jenis Kamar</th>
+                            <th>Kapasitas</th>
+                            <th>Harga</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" id="id" name="id" value="1" required></td>
+                            <td><input type="text" id="nomor_kamar" name="nomor_kamar" value="A101" required></td>
+                            <td><input type="text" id="jenis_kamar" name="jenis_kamar" value="VIP" required></td>
+                            <td><input type="text" id="kapasitas" name="kapasitas" value="3" required></td>
+                            <td><input type="text" id="harga" name="harga" value="$200" required></td>
+                            <td>
+                                <a href="#" class="settings" title="Save" data-toggle="tooltip"><i class="material-icons">&#xE161;</i></a>
+                                <a href="#" class="delete" title="Cancel" data-toggle="tooltip"><i class="material-icons">&#xE5CD;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

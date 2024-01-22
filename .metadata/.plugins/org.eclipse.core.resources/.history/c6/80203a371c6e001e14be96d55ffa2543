@@ -1,0 +1,93 @@
+package com.springboot.restfulwebservice.controller;
+
+import com.springboot.restfulwebservice.model.User;
+import com.springboot.restfulwebservice.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+    @Autowired
+    UserService userService;
+
+    @GetMapping("")
+    public List<User> list() {
+        return userService.getAllUsers(); // Mengganti userService.listAllUser() dengan userService.getAllUsers()
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<User> get(@PathVariable Long id) { // Menggunakan tipe data Long yang sesuai dengan ID pada model
+        try {
+            User user = userService.getUserById(id);
+            return new ResponseEntity<User>(user, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }
+    }
+   
+    
+    @PostMapping("/")
+    public void add(@RequestBody User user) {
+        userService.createUser(user);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@RequestBody User user, @PathVariable Long id) { // Menggunakan tipe data Long yang sesuai dengan ID pada model
+        try {
+            User existUser = userService.getUserById(id);
+            user.setId(id);
+            userService.updateUser(id, user); // Menggunakan userService.updateUser(id, user) untuk mengupdate pengguna yang ada
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) { // Menggunakan tipe data Long yang sesuai dengan ID pada model
+        userService.deleteUser(id);
+    }
+    @GetMapping("/username/{username}")
+    public ResponseEntity<User> getByUsername(@PathVariable String username) {
+        User user = userService.findByUsername(username);
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        // Not recommended, but you can save the password as plain text
+        User registeredUser = userService.createUser(user);
+        return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody User user) {
+        User loggedInUser = userService.loginUser(user.getUsername(), user.getPassword());
+        if (loggedInUser != null) {
+            return new ResponseEntity<>("Login Success", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Login failed. Invalid username or password.", HttpStatus.UNAUTHORIZED);
+        }
+    }
+    
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(SessionStatus sessionStatus) {
+        sessionStatus.setComplete(); // Clears the session
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+}

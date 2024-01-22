@@ -1,0 +1,79 @@
+package com.springboot.restfulwebservice.model;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+
+@Entity
+@Table(name = "kamar")
+public class Kamar {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private int nomorKamar;
+    private String jenisKamar;
+    private int kapasitas;
+    private int harga;
+
+    public Kamar() {
+        // Default constructor
+    }
+
+    public Kamar(int nomorKamar, String jenisKamar, int kapasitas, int harga) {
+        this.nomorKamar = nomorKamar;
+        this.jenisKamar = jenisKamar;
+        this.kapasitas = kapasitas;
+        this.harga = harga;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNamaProduk() {
+        return namaProduk;
+    }
+
+    public void setNamaProduk(String namaProduk) {
+        this.namaProduk = namaProduk;
+    }
+
+    public String getDeskripsi() {
+        return deskripsi;
+    }
+
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
+    }
+
+    public double getHarga() {
+        return harga;
+    }
+
+    public void setHarga(double harga) {
+        this.harga = harga;
+    }
+
+    public int getStok() {
+        return stok;
+    }
+
+    public void setStok(int stok) {
+        this.stok = stok;
+    }
+
+    public String getKategori() {
+        return kategori;
+    }
+
+    public void setKategori(String kategori) {
+        this.kategori = kategori;
+    }
+}

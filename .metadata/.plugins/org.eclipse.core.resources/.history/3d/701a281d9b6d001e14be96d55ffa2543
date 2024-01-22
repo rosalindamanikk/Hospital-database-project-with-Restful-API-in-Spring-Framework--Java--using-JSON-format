@@ -1,0 +1,11 @@
+package com.springboot.restfulwebservice.repository;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.springboot.restfulwebservice.model.Kamar;
+
+public interface ProdukRepository extends JpaRepository<Produk, Long> {
+    // Di sini Anda dapat menambahkan metode tambahan khusus jika diperlukan
+	Produk findByNamaProduk(String NamaProduk);
+}

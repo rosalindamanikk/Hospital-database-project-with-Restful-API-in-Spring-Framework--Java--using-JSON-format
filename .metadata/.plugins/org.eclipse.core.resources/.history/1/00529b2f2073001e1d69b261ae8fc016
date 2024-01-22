@@ -1,0 +1,46 @@
+package com.springboot.restfulwebservice.service;
+
+import com.springboot.restfulwebservice.model.DaftarPasien;
+import com.springboot.restfulwebservice.repository.DaftarPasienRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class DaftarPasienService {
+
+    private final DaftarPasienRepository daftarPasienRepository;
+
+    @Autowired
+    public DaftarPasienService(DaftarPasienRepository daftarPasienRepository) {
+        this.daftarPasienRepository = daftarPasienRepository;
+    }
+
+    public List<DaftarPasien> getAllDaftarPasien() {
+        return daftarPasienRepository.findAll();
+    }
+
+    public Optional<DaftarPasien> getDaftarPasienById(Long id_pasien) {
+        return daftarPasienRepository.findById(id_pasien);
+    }
+
+    public DaftarPasien saveDaftarPasien(DaftarPasien daftarPasien) {
+        return daftarPasienRepository.save(daftarPasien);
+    }
+
+    public void deleteDaftarPasien(Long id_pasien) {
+        daftarPasienRepository.deleteById(id_pasien);
+    }
+
+    // Tambahkan fungsi update jika diperlukan
+    public DaftarPasien updateDaftarPasien(Long id, DaftarPasien updatedDaftarPasien) {
+        if (daftarPasienRepository.existsById(id)) {
+            updatedDaftarPasien.setId_pasien(id);
+            return daftarPasienRepository.save(updatedDaftarPasien);
+        } else {
+            throw new RuntimeException("DaftarPasien with id " + id + " not found");
+        }
+    }
+}

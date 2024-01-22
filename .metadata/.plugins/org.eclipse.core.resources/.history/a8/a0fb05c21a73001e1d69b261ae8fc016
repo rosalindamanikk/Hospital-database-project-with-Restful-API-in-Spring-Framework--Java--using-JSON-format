@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Bagian head di sini -->
+</head>
+<body>
+    <div class="topnav">
+  		<a class="active" th:href="@{/dashboard}">Beranda</a>
+		<a th:href="@{/kamars/list}">Kamar</a>
+        <a th:href="@{/daftarpasiens/list}">Daftar Pasien</a>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+    <div class="container">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <h2><b>INFO DAFTAR PASIEN</b></h2>
+                        </div>
+                        <div class="col-xs-7">
+                            <a th:href="@{/daftarpasiens/createpasien}" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Add New Daftar Pasien</span></a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID Pasien</th>
+                            <th>Nama</th>
+                            <th>Usia</th>
+                            <th>Alamat</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Tanggal Masuk</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="daftarpasien : ${daftarpasiens}">
+                            <td th:text="${daftarpasien.id_pasien}">ID</td>
+                            <td th:text="${daftarpasien.nama}">Nama</td>
+                            <td th:text="${daftarpasien.usia}">Usia</td>
+                            <td th:text="${daftarpasien.alamat}">Alamat</td>
+                            <td th:text="${daftarpasien.jenis_kelamin}">Jenis Kelamin</td>
+                            <td th:text="${daftarpasien.tanggal_masuk}">Tanggal Masuk</td>
+                            <td>
+                                <a th:href="@{/daftarpasiens/edit/{id}(id=${daftarpasien.id_pasien})}" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
+                                <a th:href="@{/daftarpasiens/delete/{id}(id=${daftarpasien.id_pasien})}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!-- Kode HTML untuk tampilan UI Create Kamar -->
+<div class="container">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <h2>Create <b>Kamar</b></h2>
+                    </div>
+                </div>
+            </div>
+            <form th:action="@{/kamars/create}" method="post">
+                <div class="form-group">
+                    <label for="nomorKamar">Nomor Kamar</label>
+                    <input type="text" class="form-control" id="nomorKamar" name="nomorKamar" required>
+                </div>
+                <div class="form-group">
+                    <label for="jenisKamar">Jenis Kamar</label>
+                    <input type="text" class="form-control" id="jenisKamar" name="jenisKamar" required>
+                </div>
+                <div class="form-group">
+                    <label for="kapasitasKamar">Kapasitas Kamar</label>
+                    <input type="text" class="form-control" id="kapasitasKamar" name="kapasitasKamar" required>
+                </div>
+                <div class="form-group">
+                    <label for="hargaKamar">Harga Kamar</label>
+                    <input type="text" class="form-control" id="hargaKamar" name="hargaKamar" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Tambah Kamar</button>
+            </form>
+        </div>
+    </div>
+</div>

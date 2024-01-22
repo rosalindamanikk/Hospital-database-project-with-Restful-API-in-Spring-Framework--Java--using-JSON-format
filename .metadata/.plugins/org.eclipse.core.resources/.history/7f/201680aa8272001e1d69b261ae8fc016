@@ -1,0 +1,49 @@
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Masukkan bagian head Anda di sini -->
+</head>
+<body>
+    <div class="topnav">
+        <a class="active" th:href="@{/dashboard}">Beranda</a>
+        <a href="">Kamar</a>
+        <a href="">Daftar Pasien</a>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+    <div class="container">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <h2>User <b>Management</b></h2>
+                        </div>
+                        <div class="col-xs-7">
+                            <a th:href="@{/kamars/createkamar}" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Add New Kamar</span></a>
+                        </div>
+                    </div>
+                </div>
+                <form th:action="@{/kamars/create}" method="POST" class="form-container">
+                    <h2>Create Kamar</h2>
+                    <label for="nomor_kamar">Nomor Kamar:</label>
+                    <input type="text" id="nomor_kamar" name="nomor_kamar" required>
+
+                    <label for="jenis_kamar">Jenis Kamar:</label>
+                    <input type="text" id="jenis_kamar" name="jenis_kamar" required>
+
+                    <label for="kapasitas">Kapasitas:</label>
+                    <input type="text" id="kapasitas" name="kapasitas" required>
+
+                    <label for="harga">Harga:</label>
+                    <input type="text" id="harga" name="harga" required>
+
+                    <button type="submit" class="btn btn-success">Tambah Kamar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

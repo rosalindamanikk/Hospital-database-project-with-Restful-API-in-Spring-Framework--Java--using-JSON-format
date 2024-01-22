@@ -1,0 +1,99 @@
+package com.springboot.restfulwebservice.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.Date;
+
+@Entity
+@Table(name = "daftar_pasien")
+public class DaftarPasien {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_pasien;
+
+    private String nama;
+
+    private int usia;
+
+    private String alamat;
+
+    private String jenis_kelamin;
+
+    private int nomor_kamar;
+
+    private Date tanggal_masuk;
+
+    public DaftarPasien() {
+        // Default constructor
+    }
+
+    public DaftarPasien(String nama, int usia, String alamat, String jenis_kelamin, int nomor_kamar, Date tanggal_masuk) {
+        this.nama = nama;
+        this.usia = usia;
+        this.alamat = alamat;
+        this.jenis_kelamin = jenis_kelamin;
+        this.nomor_kamar = nomor_kamar;
+        this.tanggal_masuk = tanggal_masuk;
+    }
+
+    public Long getId_pasien() {
+        return id_pasien;
+    }
+
+    public void setId_pasien(Long id_pasien) {
+        this.id_pasien = id_pasien;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public int getUsia() {
+        return usia;
+    }
+
+    public void setUsia(int usia) {
+        this.usia = usia;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
+    public String getJenis_kelamin() {
+        return jenis_kelamin;
+    }
+
+    public void setJenis_kelamin(String jenis_kelamin) {
+        this.jenis_kelamin = jenis_kelamin;
+    }
+
+    public int getNomorKamar() {
+        return nomor_kamar;
+    }
+
+    public void setNomorKamar(int nomor_kamar) {
+        this.nomor_kamar = nomor_kamar;
+    }
+
+    public Date getTanggalMasuk() {
+        return tanggal_masuk;
+    }
+
+    public void setTanggalMasuk(Date tanggal_masuk) {
+        this.tanggal_masuk = tanggal_masuk;
+    }
+}

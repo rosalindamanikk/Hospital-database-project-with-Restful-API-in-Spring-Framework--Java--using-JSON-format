@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Kamar - Dashboard Rumah Sakit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a2d9ce; /* Ubah warna latar belakang di sini */
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-container label {
+            display: block;
+            font-weight: 600;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .form-container input[type="text"] {
+            width: calc(100% - 24px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: #4CAF50;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+    <h2>Search Kamar</h2>
+    <form th:action="@{/kamars/search}" method="GET">
+        <label for="searchKeyword">Search Keyword:</label>
+        <input type="text" id="searchKeyword" name="keyword" required>
+        <button type="submit">Search</button>
+    </form>
+
+     class="form-container">
+        <h2>Create Kamar</h2>
+        <form th:action="@{/kamars/create}" method="POST">
+            <label for="nomorKamar">Nomor Kamar:</label>
+            <input type="text" id="nomorKamar" name="nomorKamar" required>
+
+            <label for="jenisKamar">Jenis Kamar:</label>
+            <input type="text" id="jenisKamar" name="jenisKamar" required>
+
+            <label for="kapasitas">Kapasitas:</label>
+            <input type="text" id="kapasitas" name="kapasitas" required>
+
+            <label for="harga">Harga:</label>
+            <input type="text" id="harga" name="harga" required>
+
+            <button type="submit">Tambah Kamar</button>
+        </form>
+            <div class="form-container">
+        <h2>Search Kamar</h2>
+        <form th:action="@{/kamars/search}" method="GET">
+            <label for="searchKeyword">Search Keyword:</label>
+            <input type="text" id="searchKeyword" name="keyword" required>
+
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    </div>
+</body>
+</html>

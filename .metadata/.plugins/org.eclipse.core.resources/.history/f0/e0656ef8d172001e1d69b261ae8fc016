@@ -1,0 +1,77 @@
+package com.springboot.restfulwebservice.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.springboot.restfulwebservice.model.Kamar;
+import com.springboot.restfulwebservice.model.User;
+import com.springboot.restfulwebservice.repository.KamarRepository;
+
+@Controller
+@RequestMapping("/kamars")
+public class KamarControllers {
+
+	@Autowired
+	private KamarRepository kamarRepository;
+	
+	@GetMapping("/list")
+	public String showKamarList(Model model) {
+		model.addAttribute("kamars", kamarRepository.findAll());
+		return "kamar";
+	}
+	
+	@GetMapping("/createkamar")
+	public String createKamarForm(Model model) {
+		model.addAttribute("kamar", new Kamar());
+		return "createKamar";
+	}
+	
+	@PostMapping("/create")
+	public String createKamar(@ModelAttribute Kamar kamar) {
+		kamarRepository.save(kamar);
+		return "redirect:/kamars/list";
+	}
+	
+	@PostMapping("/create")
+    public String createKamar(@ModelAttribute("kamar")Kamar kamar, Model model, RedirectAttributes redirectAttributes) {
+		kamarRepository.save(kamar);
+        model.addAttribute("message", "Submitted Successfully");
+
+        // Redirect to the login page after successful registration
+        redirectAttributes.addFlashAttribute("successMessage", "Registtration successful. Please Login.");
+        return "redirect:/kamars/list";
+    }
+	
+	@GetMapping("/edit/{id}")
+    public String editKamarForm(@PathVariable Long id, Model model) {
+        Kamar kamar = kamarRepository.findById(id).orElse(null);
+        model.addAttribute("kamar", kamar);
+        return "editKamar";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editKamar(@PathVariable Long id, @ModelAttribute Kamar updatedKamar) {
+        Kamar kamar = kamarRepository.findById(id).orElse(null);
+        if (kamar != null) {
+        	kamar.setJenisKamar(updatedKamar.getJenisKamar());
+        	kamar.setHarga(updatedKamar.getHarga());
+        	kamar.setKapasitas(updatedKamar.getHarga());
+        	kamar.setNomorKamar(updatedKamar.getNomorKamar());
+        	kamarRepository.save(kamar);
+        }
+        return "redirect:/kamars/list";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteKamart(@PathVariable Long id) {
+        kamarRepository.deleteById(id);
+        return "redirect:/kamars/list";
+    }
+}

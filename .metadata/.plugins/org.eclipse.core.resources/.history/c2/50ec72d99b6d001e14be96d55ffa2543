@@ -1,0 +1,46 @@
+package com.springboot.restfulwebservice.service;
+
+
+import com.springboot.restfulwebservice.model.Kamar;
+import com.springboot.restfulwebservice.model.User;
+import com.springboot.restfulwebservice.repository.KamarRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
+@Service
+public class ProdukService {
+    private final ProdukRepository produkRepository;
+
+    @Autowired
+    public ProdukService(ProdukRepository produkRepository) {
+        this.produkRepository = produkRepository;
+    }
+
+    public List<Produk> getAllProduk() {
+        return produkRepository.findAll();
+    }
+
+    public Produk getProdukById(Long id) {
+        return produkRepository.findById(id).orElseThrow(NoSuchElementException::new);
+    }
+
+    public Produk createProduk(Produk produk) {
+        return produkRepository.save(produk);
+    }
+
+    public Produk updateProduk(Long id, Produk updatedProduk) {
+        Produk existingProduk = getProdukById(id);
+        updatedProduk.setId(existingProduk.getId()); // Pastikan ID tidak berubah
+        return produkRepository.save(updatedProduk);
+    }
+
+    public void deleteProduk(Long id) {
+        produkRepository.deleteById(id);
+    }
+    public Produk findByNamaProduk(String NamaProduk) {
+        return produkRepository.findByNamaProduk(NamaProduk);
+    }
+}

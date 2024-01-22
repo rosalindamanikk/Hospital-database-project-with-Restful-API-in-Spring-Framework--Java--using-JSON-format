@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Registration</title>
+</head>
+<body>
+   {
+        font-family: Arial, sans-serif;
+        background-color: #a2d9ce; /* Ubah warna latar belakang di sini */
+        }
+    <h1>User Registration</h1>
+    <form th:action="@{/registration}" method="POST" th:object="${user}">
+        <label for="firstName">Username:</label>
+        <input type="text" id="username" th:field="*{username}" name="username" required><br><br>
+
+        <label for="lastName">Password:</label>
+        <input type="password" id="password" th:field="*{password}" name="password" required><br><br>
+
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>

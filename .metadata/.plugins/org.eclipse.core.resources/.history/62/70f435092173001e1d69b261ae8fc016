@@ -1,0 +1,73 @@
+package com.springboot.restfulwebservice.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.springboot.restfulwebservice.model.DaftarPasien;
+import com.springboot.restfulwebservice.repository.DaftarPasienRepository;
+
+@Controller
+@RequestMapping("/daftarpasiens")
+public class DaftarPasienControllers {
+
+    @Autowired
+    private DaftarPasienRepository daftarPasienRepository;
+
+    @GetMapping("/list")
+    public String showDaftarPasienList(Model model) {
+        model.addAttribute("daftarpasiens", daftarPasienRepository.findAll());
+        return "daftarpasien";
+    }
+    
+
+    @GetMapping("/createpasien")
+    public String createPasienForm(Model model) {
+        model.addAttribute("daftarpasien", new DaftarPasien());
+        return "createDaftarPasien";
+    }
+
+    @PostMapping("/create")
+    public String createPasien(@ModelAttribute("daftarpasien") DaftarPasien daftarPasien, Model model, RedirectAttributes redirectAttributes) {
+        daftarPasienRepository.save(daftarPasien);
+        model.addAttribute("message", "Submitted Successfully");
+
+        // Redirect to the daftarpasiens list after successful registration
+        redirectAttributes.addFlashAttribute("successMessage", "Create Daftar Pasien successful.");
+        return "redirect:/daftarpasiens/list";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editPasienForm(@PathVariable Long id_pasien, Model model) {
+        DaftarPasien daftarPasien = daftarPasienRepository.findById(id).orElse(null);
+        model.addAttribute("daftarpasien", daftarPasien);
+        return "editDaftarPasien";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editPasien(@PathVariable Long id_pasien, @ModelAttribute DaftarPasien updatedDaftarPasien) {
+        DaftarPasien daftarPasien = daftarPasienRepository.findById(id).orElse(null);
+        if (daftarPasien != null) {
+            daftarPasien.setNama(updatedDaftarPasien.getNama());
+            daftarPasien.setUsia(updatedDaftarPasien.getUsia());
+            daftarPasien.setAlamat(updatedDaftarPasien.getAlamat());
+            daftarPasien.setJenis_kelamin(updatedDaftarPasien.getJenis_kelamin());
+            daftarPasien.setNomorKamar(updatedDaftarPasien.getNomorKamar());
+            daftarPasien.setTanggalMasuk(updatedDaftarPasien.getTanggalMasuk());
+            daftarPasienRepository.save(daftarPasien);
+        }
+        return "redirect:/daftarpasiens/list";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deletePasien(@PathVariable Long id_pasien) {
+        daftarPasienRepository.deleteById(id_pasien);
+        return "redirect:/daftarpasiens/list";
+    }
+}

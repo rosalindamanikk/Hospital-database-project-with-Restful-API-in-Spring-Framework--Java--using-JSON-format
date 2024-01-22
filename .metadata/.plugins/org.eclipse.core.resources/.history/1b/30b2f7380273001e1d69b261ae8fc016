@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamar Rumah Sakit</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        /* Masukkan gaya tambahan Anda di sini */
+    </style>
+</head>
+<body>
+    <div class="topnav">
+        <a class="active" th:href="@{/dashboard}">Beranda</a>
+        <a th:href="@{/kamars/list}">Kamar</a>
+        <a th:href="@{/daftarpasiens/list}">Daftar Pasien</a>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+    <div class="container">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <h2>User <b>Management</b></h2>
+                        </div>
+                        <div class="col-xs-7">
+                            <a th:href="@{/kamars/createkamar}" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Add New Kamar</span></a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>nomor kamar</th>						
+                            <th>jenis kamar</th>
+                            <th>kapasitas</th>
+                            <th>harga</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="kamar : ${kamars}">
+                            <td th:text="${kamar.id}">ID</td>
+                            <td th:text="${kamar.nomorKamar}">Nomor Kamar</td>
+                            <td th:text="${kamar.jenisKamar}">Jenis Kamar</td>                        
+                            <td th:text="${kamar.kapasitas}">Kapasitas Kamar</td>
+                            <td th:text="${kamar.harga}">Harga Kamar</td>
+                            <td>
+                                <a th:href="@{/kamars/edit/{id}(id=${kamar.id})}" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
+                                <a th:href="@{/kamars/delete/{id}(id=${kamar.id})}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

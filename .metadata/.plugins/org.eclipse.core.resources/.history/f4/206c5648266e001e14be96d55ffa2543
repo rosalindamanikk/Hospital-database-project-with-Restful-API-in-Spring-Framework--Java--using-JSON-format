@@ -1,0 +1,47 @@
+package com.springboot.restfulwebservice.controller;
+
+import com.springboot.restfulwebservice.model.DaftarPasien;
+import com.springboot.restfulwebservice.service.DaftarPasienService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/daftar-pasien")
+public class DaftarPasienController {
+
+    private final DaftarPasienService daftarPasienService;
+
+    @Autowired
+    public DaftarPasienController(DaftarPasienService daftarPasienService) {
+        this.daftarPasienService = daftarPasienService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<DaftarPasien>> getAllDaftarPasien() {
+        List<DaftarPasien> daftarPasienList = daftarPasienService.getAllDaftarPasien();
+        return new ResponseEntity<>(daftarPasienList, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DaftarPasien> getDaftarPasienById(@PathVariable Long id) {
+        return daftarPasienService.getDaftarPasienById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<DaftarPasien> createDaftarPasien(@RequestBody DaftarPasien daftarPasien) {
+        DaftarPasien createdDaftarPasien = daftarPasienService.saveDaftarPasien(daftarPasien);
+        return new ResponseEntity<>(createdDaftarPasien, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDaftarPasien(@PathVariable Long id) {
+        daftarPasienService.deleteDaftarPasien(id);
+        return ResponseEntity.noContent().build();
+    }
+}

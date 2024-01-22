@@ -1,0 +1,9 @@
+package com.springboot.restfulwebservice.repository;
+
+import com.springboot.restfulwebservice.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    // Di sini Anda dapat menambahkan metode tambahan khusus jika diperlukan
+	User findByUsername(String username);
+}

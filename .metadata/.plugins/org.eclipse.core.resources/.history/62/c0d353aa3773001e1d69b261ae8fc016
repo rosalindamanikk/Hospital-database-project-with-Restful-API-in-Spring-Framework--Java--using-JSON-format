@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Daftar Pasien - Dashboard Rumah Sakit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a2d9ce; /* Ubah warna latar belakang di sini */
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-container label {
+            display: block;
+            font-weight: 600;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .form-container input[type="text"] {
+            width: calc(100% - 24px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: #4CAF50;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Create Daftar Pasien</h2>
+        <form th:action="@{/daftarpasiens/create}" method="POST">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" required>
+
+            <label for="usia">Usia:</label>
+            <input type="text" id="usia" name="usia" required>
+
+            <label for="alamat">Alamat:</label>
+            <input type="text" id="alamat" name="alamat" required>
+
+            <label for="jenis_kelamin">Jenis Kelamin:</label>
+            <input type="text" id="jenis_kelamin" name="jenis_kelamin" required>
+
+            <label for="tanggalMasuk">Tanggal Masuk:</label>
+            <input type="text" id="tanggal_masuk" name="tanggal_masuk" required>
+
+            <button type="submit">Tambah Daftar Pasien</button>
+        </form>
+    </div>
+</body>
+</html>

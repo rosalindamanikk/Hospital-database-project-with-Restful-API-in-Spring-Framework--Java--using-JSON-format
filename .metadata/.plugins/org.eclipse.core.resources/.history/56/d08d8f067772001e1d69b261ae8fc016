@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Rumah Sakit - Edit Kamar</title>
+    <style>
+       /* Tambahkan gaya tambahan di sini */
+       .container {
+            margin: 20px;
+            width: 50%;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="topnav">
+        <a class="active" th:href="@{/dashboard}">Beranda</a>
+        <a th:href="@{/kamars/list}">Kamar</a>
+        <a href="">Daftar Pasien</a>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+
+    <div class="container">
+        <h2>Edit Kamar</h2>
+        <form th:action="@{/kamars/edit}" method="POST">
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="id" required><br>
+
+            <label for="nomor_kamar">Nomor Kamar:</label>
+            <input type="text" id="nomor_kamar" name="nomor_kamar" required><br>
+
+            <label for="jenis_kamar">Jenis Kamar:</label>
+            <input type="text" id="jenis_kamar" name="jenis_kamar" required><br>
+
+            <label for="kapasitas">Kapasitas:</label>
+            <input type="text" id="kapasitas" name="kapasitas" required><br>
+
+            <label for="harga">Harga:</label>
+            <input type="text" id="harga" name="harga" required><br>
+
+            <button type="submit">Simpan Perubahan</button>
+        </form>
+    </div>
+</body>
+</html>

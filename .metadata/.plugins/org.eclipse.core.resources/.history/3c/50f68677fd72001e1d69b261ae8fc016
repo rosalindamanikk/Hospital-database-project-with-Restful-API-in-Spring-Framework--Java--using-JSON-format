@@ -1,0 +1,39 @@
+package com.springboot.restfulwebservice.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.springboot.restfulwebservice.model.DaftarPasien;
+import com.springboot.restfulwebservice.repository.DaftarPasienRepository;
+
+@Controller
+@RequestMapping("/daftarpasiens")
+public class DaftarPasienController {
+
+    @Autowired
+    private DaftarPasienRepository daftarPasienRepository;
+
+    @GetMapping("/create")
+    public String createDaftarPasienForm(Model model) {
+        model.addAttribute("daftarPasien", new DaftarPasien());
+        return "createDaftarPasien";
+    }
+
+    @PostMapping("/create")
+    public String createDaftarPasien(@ModelAttribute("daftarPasien") DaftarPasien daftarPasien, Model model, RedirectAttributes redirectAttributes) {
+        daftarPasienRepository.save(daftarPasien);
+        model.addAttribute("message", "Submitted Successfully");
+
+        // Redirect to the list page after successful creation
+        redirectAttributes.addFlashAttribute("successMessage", "Create Daftar Pasien successful.");
+        return "redirect:/daftarpasiens/list";
+    }
+
+    // Implement other necessary methods as per your requirements
+}

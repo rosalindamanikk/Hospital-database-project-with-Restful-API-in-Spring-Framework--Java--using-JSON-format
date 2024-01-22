@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Kamar - Dashboard Rumah Sakit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a2d9ce; /* Ubah warna latar belakang di sini */
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .form-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Edit Kamar</h2>
+        <form id="editForm">
+
+            <label for="nomorKamar">Nomor Kamar:</label>
+            <input type="text" id="nomorKamar" name="nomorKamar" value="123" required><br>
+
+            <label for="jenisKamar">Jenis Kamar:</label>
+            <input type="text" id="jenisKamar" name="jenisKamar" value="Single" required><br>
+
+            <label for="kapasitas">Kapasitas:</label>
+            <input type="text" id="kapasitas" name="kapasitas" value="1" required><br>
+
+            <label for="harga">Harga:</label>
+            <input type="text" id="harga" name="harga" value="100000" required><br>
+
+            <button type="submit" onclick="editKamar()">Simpan Perubahan</button>
+        </form>
+    </div>
+    <script>
+        function editKamar(id) {
+            const nomorKamar = document.getElementById('nomorKamar').value;
+            const jenisKamar = document.getElementById('jenisKamar').value;
+            const kapasitas = document.getElementById('kapasitas').value;
+            const harga = document.getElementById('harga').value;
+
+            const url = `http://localhost:8010/kamars/edit/${id}`;
+            const data = {
+                nomorKamar: nomorKamar,
+                jenisKamar: jenisKamar,
+                kapasitas: kapasitas,
+                harga: harga
+            };
+
+            const requestOptions = {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            };
+
+            try {
+                const response = await fetch(url, requestOptions);
+                if (response.ok) {
+                    window.location.href = 'http://localhost:8010/kamars/list';
+                } else {
+                    console.error('Gagal memperbarui data');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>

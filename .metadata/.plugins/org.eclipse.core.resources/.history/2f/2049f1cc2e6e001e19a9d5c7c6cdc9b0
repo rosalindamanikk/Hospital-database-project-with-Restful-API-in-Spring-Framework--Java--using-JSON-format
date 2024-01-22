@@ -1,0 +1,50 @@
+package com.springboot.restfulwebservice.controller;
+
+import com.springboot.restfulwebservice.model.Kamar;
+import com.springboot.restfulwebservice.service.KamarService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
+@RestController
+@RequestMapping("/kamar")
+public class KamarController {
+    private final KamarService kamarService;
+
+    @Autowired
+    public KamarController(KamarService kamarService) {
+        this.kamarService = kamarService;
+    }
+
+    @GetMapping("")
+    public List<Kamar> list() {
+        return kamarService.getAllKamar();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Kamar> get(@PathVariable Long id) {
+        try {
+            Kamar kamar = kamarService.getKamarById(id);
+            return new ResponseEntity<>(kamar, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<String> add(@RequestBody Kamar kamar) {
+        kamarService.createKamar(kamar);
+        return new ResponseEntity<>("Kamar created successfully", HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@RequestBody Kamar kamar, @PathVariable Long id) {
+        try {
+            Kamar existingKamar = kamarService.getKamarById(id);
+            kamar.setId(id);
+            kamarService.updateKamar(kamar);
+            return new ResponseEntity<>("Kamar updated successfully", HttpStatus

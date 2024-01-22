@@ -1,0 +1,65 @@
+package com.springboot.restfulwebservice.controller;
+
+import com.springboot.restfulwebservice.model.Kamar;
+import com.springboot.restfulwebservice.service.KamarService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
+@RestController
+@RequestMapping("/kamar")
+public class KamarController {
+    @Autowired
+    KamarService kamarService;
+
+    @GetMapping("/all")
+    public List<Kamar> list() {
+        return kamarService.getAllKamar();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Kamar> get(@PathVariable Long id) {
+        try {
+        	Kamar kamar = kamarService.getKamarById(id);
+            return new ResponseEntity<Kamar>(kamar, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<Kamar>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/add")
+    public void add(@RequestBody Kamar kamar) {
+        kamarService.createKamar(kamar);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@RequestBody Kamar kamar, @PathVariable Long id) {
+        try {
+        	Kamar existingKamar = kamarService.getKamarById(id);
+            kamar.setId(id);
+            kamarService.updateKamar(id, kamar);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        kamarService.deleteKamar(id);
+    }
+    
+//    @GetMapping("/namaproduk/{namaProduk}")
+//    public ResponseEntity<Produk> getByNamaProduk(@PathVariable String namaProduk) {
+//        Produk produk = produkService.findByNamaProduk(namaProduk);
+//        if (produk != null) {
+//            return new ResponseEntity<>(produk, HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
+}

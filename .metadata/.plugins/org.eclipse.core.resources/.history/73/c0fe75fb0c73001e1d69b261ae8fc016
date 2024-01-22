@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Your existing code for the head -->
+    <!-- ... -->
+</head>
+<body>
+    <!-- Your existing code for the body -->
+    <!-- ... -->
+
+    <!-- Add the search feature -->
+    <div class="form-container">
+        <h2>Search Kamar</h2>
+        <form th:action="@{/kamars/search}" method="GET">
+            <label for="searchKeyword">Search Keyword:</label>
+            <input type="text" id="searchKeyword" name="keyword" required>
+
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</body>
+</html>

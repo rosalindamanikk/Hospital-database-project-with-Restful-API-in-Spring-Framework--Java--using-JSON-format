@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Pasien - Dashboard Rumah Sakit</title>
+    <!-- Masukkan gaya tambahan Anda di sini -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a2d9ce; /* Ubah warna latar belakang di sini */
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .form-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Edit Pasien</h2>
+        <form th:action="@{/daftarpasiens/edit/}" method="PUT">
+
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" th:value="${daftar_pasien.nama}" required><br>
+
+            <label for="jenisKelamin">Jenis Kelamin:</label>
+            <input type="text" id="jenisKelamin" name="jenisKelamin" th:value="${daftar_pasien.jenis_kelamin}" required><br>
+
+            <label for="usia">Usia:</label>
+            <input type="text" id="usia" name="usia" th:value="${daftar_pasien.usia}" required><br>
+
+            <label for="alamat">Alamat:</label>
+            <input type="text" id="alamat" name="alamat" th:value="${daftar_pasien.alamat}" required><br>
+
+            <button type="submit">Simpan Perubahan</button>
+        </form>
+    </div>
+</body>
+</html>

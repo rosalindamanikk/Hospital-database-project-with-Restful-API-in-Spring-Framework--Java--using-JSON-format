@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a2d9ce; /* Ubah warna latar belakang di sini */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>SILAHKAN MASUK DENGAN AKUN ANDA</h1>
+
+        <!-- Check for the registrationSuccess flash attribute and display a message -->
+        <th:block th:if="${registrationSuccess}">
+            <p style="color: green;">Registration successful! You can now log in.</p>
+        </th:block>
+        <form th:action="@{/authenticate}" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
